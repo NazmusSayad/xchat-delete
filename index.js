@@ -18,11 +18,17 @@ const postData = async (name, msg) => {
 }
 
 const deleteAll = async () => {
-  await fetch("https://sheetdb.io/api/v1/b70w6hs5ccavr/all", {
+  const res = await fetch("https://sheetdb.io/api/v1/b70w6hs5ccavr/all", {
     method: "DELETE",
   })
 
-  console.log("All Data Deleted")
+  console.log("Data deleted...")
+  return res
 }
 
-deleteAll()
+const loop = async () => {
+  await deleteAll()
+  loop()
+}
+
+loop()
