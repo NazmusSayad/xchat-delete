@@ -31,4 +31,8 @@ const loop = async () => {
   loop()
 }
 
-loop()
+// loop()
+
+setInterval(() => {
+  deleteAll()
+}, 1000)
