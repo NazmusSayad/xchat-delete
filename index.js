@@ -39,7 +39,7 @@ loop()
 // }, 1000)
 
 const server = http.createServer((req, res) => {
-  //your stuff
+  res.end("Hello World!")
 })
 
 server.listen(process.env.PORT || 80, () => {
