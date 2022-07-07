@@ -27,21 +27,42 @@ const deleteAll = async () => {
   return res
 }
 
+//=======================
+let isLoopRunning
+
 const loop = async () => {
+  if (!isLoopRunning) return
   await deleteAll()
   loop()
 }
 
-loop()
+const startLoop = () => {
+  if (isLoopRunning) return
+  console.log("Started...")
+  isLoopRunning = true
+  loop()
+}
 
-// setInterval(() => {
-//   deleteAll()
-// }, 1000)
+const stopLoop = () => {
+  if (!isLoopRunning) return
+  console.log("Stopped...")
+  isLoopRunning = false
+}
+
+//=======================
 
 const server = http.createServer((req, res) => {
-  res.end("Hello World!")
+  if (req.url === "/stop") {
+    stopLoop()
+    return res.end("<h1>Deletion stopped!</h1>")
+  }
+
+  if (req.url === "/start") {
+    startLoop()
+    return res.end("<h1>Deletion started!</h1>")
+  }
+
+  res.end("<h1>Hello World!</h1>")
 })
 
-server.listen(process.env.PORT || 80, () => {
-  console.log("Listening on port 80")
-})
+server.listen(process.env.PORT || 80)
