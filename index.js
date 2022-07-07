@@ -1,5 +1,6 @@
 const fetch = require("node-fetch")
 const FormData = require("form-data")
+const http = require("http")
 
 const getData = async () => {
   const res = await fetch("https://sheetdb.io/api/v1/b70w6hs5ccavr")
@@ -31,8 +32,16 @@ const loop = async () => {
   loop()
 }
 
-// loop()
+loop()
 
-setInterval(() => {
-  deleteAll()
-}, 1000)
+// setInterval(() => {
+//   deleteAll()
+// }, 1000)
+
+const server = http.createServer((req, res) => {
+  //your stuff
+})
+
+server.listen(process.env.PORT || 80, () => {
+  console.log("Listening on port 80")
+})
