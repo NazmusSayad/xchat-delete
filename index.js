@@ -62,7 +62,7 @@ const server = http.createServer((req, res) => {
     return res.end("<h1>Deletion started!</h1>")
   }
 
-  res.end("<h1>Hello World!</h1>")
+  // res.end("<h1>Hello World!</h1>")
 })
 
 server.listen(process.env.PORT || 80)
